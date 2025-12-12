@@ -1,0 +1,18 @@
+# 1. SETUP : On force Node.js 22 (Indispensable pour Vite 7)
+[phases.setup]
+nixPkgs = ["nodejs_22"]
+
+# 2. INSTALL : On installe les dépendances avec du Cache
+# Le cache évite de re-télécharger tout internet à chaque déploiement
+[phases.install]
+cmds = ["npm install"]
+cacheDirectories = ["node_modules"]
+
+# 3. BUILD : On compile l'application
+[phases.build]
+cmds = ["npm run build"]
+
+# 4. START : Sécurité (Optionnel si tu utilises "Publish Directory" dans Dokploy)
+# Cela permet de tester l'image localement si besoin, mais Dokploy utilisera son propre Nginx.
+[start]
+cmd = "npm run preview"
