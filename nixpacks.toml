@@ -1,18 +1,17 @@
-# 1. SETUP : On force Node.js 22 (Indispensable pour Vite 7)
+# 1. SETUP : On passe à Node 23 pour satisfaire Vite 7 (>=22.12)
 [phases.setup]
-nixPkgs = ["nodejs_22"]
+nixPkgs = ["nodejs_23"]
 
-# 2. INSTALL : On installe les dépendances avec du Cache
-# Le cache évite de re-télécharger tout internet à chaque déploiement
+# 2. INSTALL : CRUCIAL
+# On force "--include=dev" pour installer TypeScript (tsc) même en mode production
 [phases.install]
-cmds = ["npm install"]
+cmds = ["npm install --include=dev"]
 cacheDirectories = ["node_modules"]
 
-# 3. BUILD : On compile l'application
+# 3. BUILD : On compile
 [phases.build]
 cmds = ["npm run build"]
 
-# 4. START : Sécurité (Optionnel si tu utilises "Publish Directory" dans Dokploy)
-# Cela permet de tester l'image localement si besoin, mais Dokploy utilisera son propre Nginx.
+# 4. START
 [start]
 cmd = "npm run preview"
