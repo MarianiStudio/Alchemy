@@ -5,7 +5,7 @@ nixPkgs = ["nodejs_23"]
 # 2. INSTALL : CRUCIAL
 # On force "--include=dev" pour installer TypeScript (tsc) même en mode production
 [phases.install]
-cmds = ["npm install --include=dev"]
+cmds = ["npm install"]
 cacheDirectories = ["node_modules"]
 
 # 3. BUILD : On compile
